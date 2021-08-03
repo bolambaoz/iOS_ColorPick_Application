@@ -55,32 +55,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let storBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nextViewController = storyboard?.instantiateViewController(identifier: "ColorViewController") as! ColorViewController
-        
-        switch strColors[indexPath.row] {
-            case "blue":
-                nextViewController.view.backgroundColor = UIColor.blue
-                nextViewController.colorLabel.text = strColors[indexPath.row]
-                
-            case "red":
-                nextViewController.view.backgroundColor = UIColor.red
-                nextViewController.colorLabel.text = strColors[indexPath.row]
-            case "green":
-                nextViewController.view.backgroundColor = UIColor.green
-                nextViewController.colorLabel.text = strColors[indexPath.row]
-            default:
-                return
-        }
-        
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-        
-        
+        navigateControl(strColors[indexPath.row])
     }
     
 }
 
 extension ViewController {
+    
+    private func navigateControl(_ destinationColor: String){
+        
+        let _ : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyboard?.instantiateViewController(identifier: "ColorViewController") as! ColorViewController
+        
+        nextViewController.view.backgroundColor = cellCustomColor(destinationColor)
+        nextViewController.colorLabel.text = destinationColor
+
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
     
     private func cellCustomColor(_ colorName: String) -> UIColor {
         switch colorName {
@@ -94,4 +85,5 @@ extension ViewController {
                 return .white
         }
     }
+    
 }
