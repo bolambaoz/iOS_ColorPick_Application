@@ -45,6 +45,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "colorCell")
         }
         
+        cell?.backgroundColor = cellCustomColor(strColors[indexPath.row])
         cell?.textLabel?.text = strColors[indexPath.row]
         
         return cell!
@@ -77,4 +78,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+}
+
+extension ViewController {
+    
+    private func cellCustomColor(_ colorName: String) -> UIColor {
+        switch colorName {
+            case "blue":
+                return .blue
+            case "red":
+                return .red
+            case "green":
+                return .green
+            default:
+                return .white
+        }
+    }
 }
